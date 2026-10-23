@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vee Beauty Point | Luxury Cosmetics by Vanessa</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* ========================================================
+       1. VARIABLES NA MITINDO YA MSINGI (DARK LUXURY)
+       ======================================================== */
+    :root {
+      --bg-dark: #0a0b0e;
+      --bg-surface: #12141a;
+      --bg-card: #181b24;
+      --gold-primary: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-gradient: linear-gradient(135deg, #f7d070 0%, #d4af37 50%, #aa771c 100%);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(212, 175, 55, 0.2);
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Outfit', sans-serif;
+      --transition: all 0.3s ease;
+      --shadow-luxury: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(212, 175, 55, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ========================================================
+       KITUFE CHA KUGANYIA SIMU (REAL PHONE FRAME SIMULATOR)
+       ======================================================== */
+    .simulator-control-bar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(18, 20, 26, 0.96);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .toggle-frame-btn {
+      background: var(--gold-gradient);
+      color: #000;
+      border: none;
+      padding: 7px 18px;
+      border-radius: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .toggle-frame-btn:hover {
+      transform: scale(1.03);
+    }
+
+    /* Utekelezaji wa Fremu Halisi ya Simu */
+    .app-viewport {
+      transition: all 0.5s ease;
+      margin: 0 auto;
+    }
+
+    body.phone-frame-active {
+      background: #040507;
+      padding: 30px 0;
+    }
+
+    body.phone-frame-active .app-viewport {
+      max-width: 414px;
+      height: 840px;
+      border: 12px solid #272a33;
+      border-radius: 50px;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.2);
+      position: relative;
+    }
+
+    .phone-island {
+      display: none;
+    }
+
+    body.phone-frame-active .phone-island {
+      display: block;
+      width: 110px;
+      height: 25px;
+      background: #000;
+      border-radius: 20px;
+      margin: 10px auto;
+      position: sticky;
+      top: 10px;
+      z-index: 999;
+    }
+
+    /* ========================================================
+       HEADER / NAVIGATION
+       ======================================================== */
+    header {
+      background: rgba(10, 11, 14, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 16px 0;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .brand-text {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-light);
+    }
+
+    .nav-phone-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(37, 211, 102, 0.15);
+      border: 1px solid rgba(37, 211, 102, 0.3);
+      color: #25d366;
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .nav-phone-badge:hover {
+      background: #25d366;
+      color: #000;
+    }
+
+    /* ========================================================
+       SEHEMU YA 1: COVER PAGE / HERO SECTION (DARK MODE)
+       ======================================================== */
+    .hero-section {
+      padding: 80px 0 100px 0;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--border-color);
+      color: var(--gold-light);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.3rem, 4vw, 3.6rem);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .hero-title span {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-description {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+    }
+
+    .btn-primary {
+      background: var(--gold-gradient);
+      color: #000;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(37, 211, 102, 0.12);
+      color: #25d366;
+      border: 1px solid rgba(37, 211, 102, 0.35);
+      padding: 12px 26px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .btn-secondary:hover {
+      background: #25d366;
+      color: #000;
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 20px;
+    }
+
+    .stat-number {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .hero-img-box {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-luxury);
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ========================================================
+       SEHEMU YA 2: BIDHAA ZA KIKE NA KIUME
+       ======================================================== */
+    .products-section {
+      padding: 80px 0;
+      background: var(--bg-surface);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 40px auto;
+    }
+
+    .section-subtitle {
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2.3rem;
+      margin-top: 8px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 35px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 8px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--gold-gradient);
+      color: #000;
+      border-color: transparent;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--gold-primary);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 3px 10px;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      z-index: 2;
+    }
+
+    .badge-female { background: #e06d75; color: #fff; }
+    .badge-male { background: #4a77d4; color: #fff; }
+
+    .product-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .product-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .product-price-row {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+    }
+
+    .product-price {
+      font-size: 1.1rem;
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    .btn-buy-wa {
+      background: #25d366;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: var(--transition);
+    }
+
+    .btn-buy-wa:hover {
+      background: #1eb855;
+      transform: scale(1.05);
+    }
+
+    /* ========================================================
+       SEHEMU YA 3: WASIFU WA VANESSA & SIFA ZAIDI
+       ======================================================== */
+    .about-section {
+      padding: 90px 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .about-photo {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-luxury);
+    }
+
+    .founder-quote-card {
+      background: var(--bg-card);
+      border-left: 4px solid var(--gold-primary);
+      padding: 22px;
+      border-radius: 0 16px 16px 0;
+      margin: 20px 0 25px 0;
+    }
+
+    .quote-text {
+      font-style: italic;
+      color: #e2e8f0;
+      font-size: 1.08rem;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .quote-author {
+      color: var(--gold-primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .strength-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 14px;
+      border-radius: 14px;
+    }
+
+    .strength-item h4 {
+      color: var(--gold-light);
+      font-size: 0.92rem;
+      margin-bottom: 4px;
+    }
+
+    .strength-item p {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* ========================================================
+       SEHEMU YA MAWASILIANO & DIRECT SOCIAL LINKS
+       ======================================================== */
+    .contact-section {
+      padding: 80px 0;
+      background: var(--bg-surface);
+    }
+
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .phone-highlight-box {
+      background: rgba(37, 211, 102, 0.08);
+      border: 1px solid rgba(37, 211, 102, 0.25);
+      padding: 14px 18px;
+      border-radius: 16px;
+      margin: 18px 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .phone-highlight-box i {
+      font-size: 1.6rem;
+      color: #25d366;
+    }
+
+    .phone-highlight-number {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      display: block;
+      letter-spacing: 0.5px;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 15px;
+      transition: var(--transition);
+    }
+
+    .btn-wa {
+      background: rgba(37, 211, 102, 0.15);
+      color: #25d366;
+      border: 1px solid rgba(37, 211, 102, 0.3);
+    }
+
+    .btn-wa:hover {
+      background: #25d366;
+      color: #000;
+      transform: translateX(5px);
+    }
+
+    .btn-ig {
+      background: rgba(225, 48, 108, 0.15);
+      color: #e1306c;
+      border: 1px solid rgba(225, 48, 108, 0.3);
+    }
+
+    .btn-ig:hover {
+      background: #e1306c;
+      color: #fff;
+      transform: translateX(5px);
+    }
+
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      background: #0f1117;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #fff;
+      margin-bottom: 12px;
+      font-family: inherit;
+    }
+
+    .contact-form input:focus, .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--gold-primary);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Responsive Queries */
+    @media (max-width: 900px) {
+      .hero-grid, .about-grid, .contact-card {
+        grid-template-columns: 1fr;
+      }
+      .nav-links { display: none; }
+      .strengths-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIMULATOR CONTROL BAR -->
+  <div class="simulator-control-bar">
+    <div><strong>Vee Beauty Point</strong> • Responsive & Mobile Adaptive</div>
+    <button class="toggle-frame-btn" id="togglePhoneFrameBtn">
+      <i class="fa-solid fa-mobile-screen"></i>
+      <span id="btnFrameText">Onyesha Fremu ya Simu (Phone Frame View)</span>
+    </button>
+  </div>
+
+  <div class="app-viewport">
+    
+    <!-- Phone Notch -->
+    <div class="phone-island"></div>
+
+    <!-- HEADER -->
+    <header>
+      <div class="container nav-container">
+        <a href="#home" class="brand-logo">
+          <div class="brand-icon">V</div>
+          <span class="brand-text">Vee Beauty Point</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#products">Cosmetics</a></li>
+          <li><a href="#about">About Vanessa</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="https://wa.me/255650201485?text=Habari%20Vanessa%2C%20nimependa%20bidhaa%20zako%20za%20Vee%20Beauty%20Point%20naomba%20kufanya%20oda" target="_blank" class="nav-phone-badge">
+          <i class="fa-brands fa-whatsapp"></i> 0650 201 485
+        </a>
+      </div>
+    </header>
+
+    <!-- SEHEMU YA 1: COVER PAGE / HERO -->
+    <section class="hero-section" id="home">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-tag">
+              <i class="fa-solid fa-sparkles"></i> Vipodozi Halisi • Kike & Kiume
+            </div>
+            <h1 class="hero-title">
+              Mng'ao wa Asili & <span>Urembo wa Kisasa</span>.
+            </h1>
+            <p class="hero-description">
+              Karibu <strong>Vee Beauty Point</strong> — nyumba ya vipodozi bora, salama na vilivyothibitishwa kwa ajili ya kutunza na kung'arisha ngozi ya kike na kiume.
+            </p>
+            <div class="hero-buttons">
+              <a href="#products" class="btn-primary">
+                <i class="fa-solid fa-bag-shopping"></i> Tazama Bidhaa
+              </a>
+              <!-- Direct WhatsApp Button yenye namba 0650201485 (255650201485) -->
+              <a href="https://wa.me/255650201485?text=Habari%20Vanessa%2C%20nahitaji%20ushauri%20kuhusu%20ngozi%20yangu%20kutoka%20Vee%20Beauty%20Point" target="_blank" class="btn-secondary">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp: 0650 201 485
+              </a>
+            </div>
+            <div class="hero-stats">
+              <div>
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Asilia & Salama</div>
+              </div>
+              <div>
+                <div class="stat-number">2,500+</div>
+                <div class="stat-label">Wateja Walioridhika</div>
+              </div>
+              <div>
+                <div class="stat-number">Mikoani</div>
+                <div class="stat-label">Delivery Popote</div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-img-box">
+            <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80" alt="Vipodozi vya Vee Beauty Point" class="hero-img">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEHEMU YA 2: BIDHAA ZA KIKE NA KIUME -->
+    <section class="products-section" id="products">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Chaguo Bora</span>
+          <h2 class="section-title">Vipodozi vya Kike & Kiume</h2>
+        </div>
+
+        <div class="filter-tabs">
+          <button class="tab-btn active" data-filter="all">Vyote</button>
+          <button class="tab-btn" data-filter="women">Vya Kike</button>
+          <button class="tab-btn" data-filter="men">Vya Kiume</button>
+        </div>
+
+        <div class="product-grid">
+          <!-- Kike 1 -->
+          <div class="product-card" data-category="women">
+            <span class="product-badge badge-female">Vya Kike</span>
+            <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Serum">
+            <div class="product-info">
+              <h3 class="product-name">Radiant Glow Vitamin C Serum</h3>
+              <div class="product-price-row">
+                <span class="product-price">TSh 45,000</span>
+                <a href="https://wa.me/255650201485?text=Habari%20Vanessa%2C%20nahitaji%20Vitamin%20C%20Serum%20kutoka%20Vee%20Beauty%20Point" target="_blank" class="btn-buy-wa">
+                  <i class="fa-brands fa-whatsapp"></i> Agiza
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kiume 1 -->
+          <div class="product-card" data-category="men">
+            <span class="product-badge badge-male">Vya Kiume</span>
+            <img src="https://images.unsplash.com/photo-1621607512214-68297480165e?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Beard Oil">
+            <div class="product-info">
+              <h3 class="product-name">King's Beard Growth & Shaving Oil</h3>
+              <div class="product-price-row">
+                <span class="product-price">TSh 35,000</span>
+                <a href="https://wa.me/255650201485?text=Habari%20Vanessa%2C%20nahitaji%20Beard%20Oil%20kutoka%20Vee%20Beauty%20Point" target="_blank" class="btn-buy-wa">
+                  <i class="fa-brands fa-whatsapp"></i> Agiza
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kike 2 -->
+          <div class="product-card" data-category="women">
+            <span class="product-badge badge-female">Vya Kike</span>
+            <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Lipstick">
+            <div class="product-info">
+              <h3 class="product-name">Velvet Luxury Matte Lipstick</h3>
+              <div class="product-price-row">
+                <span class="product-price">TSh 25,000</span>
+                <a href="https://wa.me/255650201485?text=Habari%20Vanessa%2C%20nahitaji%20Velvet%20Lipstick%20kutoka%20Vee%20Beauty%20Point" target="_blank" class="btn-buy-wa">
+                  <i class="fa-brands fa-whatsapp"></i> Agiza
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kiume 2 -->
+          <div class="product-card" data-category="men">
+            <span class="product-badge badge-male">Vya Kiume</span>
+            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=500&q=80" class="product-img" alt="Men Cologne">
+            <div class="product-info">
+              <h3 class="product-name">Gentleman Noir Eau De Parfum</h3>
+              <div class="product-price-row">
+                <span class="product-price">TSh 60,000</span>
+                <a href="https://wa.me/255650201485?text=Habari%20Vanessa%2C%20nahitaji%20Gentleman%20Noir%20kutoka%20Vee%20Beauty%20Point" target="_blank" class="btn-buy-wa">
+                  <i class="fa-brands fa-whatsapp"></i> Agiza
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEHEMU YA 3: WASIFU WA VANESSA & SIFA ZAIDI -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div>
+            <img src="gx.jpeg" alt="Vanessa - Mwanzilishi wa Vee Beauty Point" class="about-photo">
+          </div>
+          <div>
+            <span class="section-subtitle">Mwanzilishi wa Vee Beauty Point</span>
+            <h2 class="section-title">Kuhusu Mimi (Vanessa)</h2>
+            
+            <div class="founder-quote-card">
+              <p class="quote-text">
+                "Mimi ni <strong>Vanessa</strong>, binti mdogo mwenye ndoto kubwa sana katika mambo ya urembo. Napenda kuwaletea bidhaa nzuri, salama na zinazopendwa zaidi kwa ajili ya kike na kiume. Lengo langu ni kuhakikisha kila mtu anajiamini na kuonyesha mwonekano wake halisi."
+              </p>
+              <span class="quote-author">Vanessa — Mkurugenzi, Vee Beauty Point</span>
+            </div>
+
+            <div class="strengths-grid">
+              <div class="strength-item">
+                <h4><i class="fa-solid fa-leaf"></i> 100% Asilia & Salama</h4>
+                <p>Haina kemikali kali, inafaa kwa kila ngozi nyeti.</p>
+              </div>
+              <div class="strength-item">
+                <h4><i class="fa-solid fa-comments"></i> Ushauri wa Kitaalamu</h4>
+                <p>Ushauri wa bure wa jinsi ya kutunza ngozi yako.</p>
+              </div>
+              <div class="strength-item">
+                <h4><i class="fa-solid fa-truck"></i> Usafirishaji Haraka</h4>
+                <p>Tunakutumia popote ulipo Tanzania kwa uaminifu mkubwa.</p>
+              </div>
+              <div class="strength-item">
+                <h4><i class="fa-solid fa-tags"></i> Bei Nafuu & Halisi</h4>
+                <p>Gharama nafuu zinazoendana na ubora wa kiwango cha juu.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAWASILIANO & DIRECT LINKS -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="contact-card">
+          <div>
+            <span class="section-subtitle">Tupigie / Tuma Ujumbe</span>
+            <h2 class="section-title">Wasiliana Nasi Moja kwa Moja</h2>
+            
+            <div class="phone-highlight-box">
+              <i class="fa-solid fa-phone-volume"></i>
+              <div>
+                <small style="color: var(--text-muted); font-size: 0.75rem;">Namba Rasmi ya Vanessa (Vee Beauty Point):</small>
+                <span class="phone-highlight-number">0650 201 485</span>
+              </div>
+            </div>
+
+            <p style="color: var(--text-muted); margin-bottom: 20px;">
+              Bofya link za haraka hapa chini ili kumtumia ujumbe wa moja kwa moja Vanessa kwenye WhatsApp:
+            </p>
+
+            <!-- Direct WhatsApp Link (255650201485) -->
+            <a href="https://wa.me/255650201485?text=Habari%20Vanessa%2C%20nimeona%20website%20yako%20ya%20Vee%20Beauty%20Point%20na%20nahitaji%20huduma" target="_blank" class="social-btn btn-wa">
+              <span><i class="fa-brands fa-whatsapp"></i> WhatsApp: 0650 201 485</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+            <!-- Direct Instagram Link -->
+            <a href="https://instagram.com/vee_beauty_point" target="_blank" class="social-btn btn-ig">
+              <span><i class="fa-brands fa-instagram"></i> Instagram: @vee_beauty_point</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <!-- Quick WhatsApp Form -->
+          <form class="contact-form" id="contactForm">
+            <h3 style="color: var(--gold-light); margin-bottom: 15px;">Tuma Ujumbe wa Haraka</h3>
+            <input type="text" id="custName" placeholder="Jina lako" required>
+            <input type="tel" id="custPhone" placeholder="Namba yako ya Simu" required>
+            <textarea id="custMsg" rows="3" placeholder="Aina ya bidhaa au ushauri unaotaka..." required></textarea>
+            <button type="submit" class="btn-primary" style="width: 100%; border: none; cursor: pointer;">
+              <i class="fa-brands fa-whatsapp"></i> Tuma Moja kwa Moja WhatsApp (0650 201 485)
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 Vee Beauty Point • Na Vanessa. Haki zote zimehifadhiwa.</p>
+    </footer>
+
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // 1. Phone Frame Toggle
+    const toggleBtn = document.getElementById('togglePhoneFrameBtn');
+    const btnFrameText = document.getElementById('btnFrameText');
+
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('phone-frame-active');
+      const isActive = document.body.classList.contains('phone-frame-active');
+      btnFrameText.textContent = isActive 
+        ? "Rudisha Skrini Nzima (Desktop View)" 
+        : "Onyesha Fremu ya Simu (Phone Frame View)";
+    });
+
+    // 2. Product Category Filter
+    const filterBtns = document.querySelectorAll('.tab-btn');
+    const productCards = document.querySelectorAll('.product-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+        productCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          card.style.display = (filter === 'all' || category === filter) ? 'flex' : 'none';
+        });
+      });
+    });
+
+    // 3. Fomu ya Haraka ya WhatsApp inayotuma moja kwa moja kwa 0650201485 (255650201485)
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const msg = document.getElementById('custMsg').value.trim();
+      
+      const message = `Habari Vanessa (Vee Beauty Point),\nNaitwa: ${name}\nNamba yangu: ${phone}\nUjumbe/Mahitaji: ${msg}`;
+      // Inatuma moja kwa moja namba ya Vanessa: 0650201485
+      window.open(`https://wa.me/255650201485?text=${encodeURIComponent(message)}`, '_blank');
+    });
+  </script>
+</body>
+</html>
